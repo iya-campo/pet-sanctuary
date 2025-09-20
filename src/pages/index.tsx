@@ -1,6 +1,11 @@
 import Head from 'next/head';
+import HeroSection from './components/HeroSection';
+import Categories from './components/Categories';
+import { Container, Stack } from '@mui/material';
+import Layout from '@/components/Layout';
+import { ReactNode } from 'react';
 
-export default function Home() {
+const HomePage = () => {
   return (
     <>
       <Head>
@@ -10,9 +15,25 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <div>
-        <main>Dashboard</main>
+        <main>
+          <Container sx={{  pb: 4 }}>
+            <Stack spacing={4}>
+              <HeroSection />
+              <Categories />
+            </Stack>
+          </Container>
+        </main>
         <footer></footer>
       </div>
     </>
   );
 }
+
+
+
+HomePage.getLayout = function getLayout(page: ReactNode) {
+  return <Layout>{page}</Layout>;
+};
+
+export default HomePage;
+
