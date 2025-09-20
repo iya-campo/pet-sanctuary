@@ -1,8 +1,13 @@
+import { Container } from "@mui/material";
+import GlobalHeader from "./GlobalHeader";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       <header>
-        <h1>Pet Sanctuary</h1>
+          <Container>
+            <GlobalHeader />
+          </Container>
       </header>
       <main>{children}</main>
     </div>
