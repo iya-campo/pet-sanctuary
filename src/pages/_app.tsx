@@ -1,8 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { ThemeProvider, CssBaseline } from '@mui/material';
-import { lightTheme, darkTheme } from '../theme';
 import '@/styles/globals.css';
 import { ThemeContextProvider } from '@/context/ThemeContext';
 
