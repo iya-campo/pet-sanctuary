@@ -19,16 +19,18 @@ const Filter = () => {
   
     return (
     <Stack direction='row' alignItems='center' spacing={2}>
-        <FormControl sx={{ flex: 1 }}>
+        <FormControl sx={{ flex: 1.5 }}>
             <RadioGroup
                 aria-labelledby="demo-radio-buttons-group-label"
                 name="radio-buttons-group"
                 value={option}
                 onChange={handleOptionChange}
+                sx={{ justifyContent: 'space-around' }}
                 row
             >
                 <FormControlLabel value="lost" control={<Radio />} label="Lost" />
                 <FormControlLabel value="found" control={<Radio />} label="Found" />
+                <FormControlLabel value="adoption" control={<Radio />} label="For Adoption" />
             </RadioGroup>
         </FormControl>
         <TextField
