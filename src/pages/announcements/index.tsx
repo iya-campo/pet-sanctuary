@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
 import Layout from '@/components/Layout';
 import { Container, Stack, Typography } from '@mui/material';
 import Filter from './components/Filter';
