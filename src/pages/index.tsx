@@ -1,9 +1,9 @@
+import { ReactNode } from 'react';
 import Head from 'next/head';
-import HeroSection from './components/HeroSection';
-import Categories from './components/Categories';
+import HeroSection from '../components/HeroSection';
+import Categories from '../components/Categories';
 import { Container, Stack } from '@mui/material';
 import Layout from '@/components/Layout';
-import { ReactNode } from 'react';
 
 const HomePage = () => {
   return (
@@ -16,7 +16,7 @@ const HomePage = () => {
       </Head>
       <div>
         <main>
-          <Container sx={{  pb: 4 }}>
+          <Container sx={{ pb: 4 }}>
             <Stack spacing={4}>
               <HeroSection />
               <Categories />
@@ -27,13 +27,10 @@ const HomePage = () => {
       </div>
     </>
   );
-}
-
-
+};
 
 HomePage.getLayout = function getLayout(page: ReactNode) {
   return <Layout>{page}</Layout>;
 };
 
 export default HomePage;
-
