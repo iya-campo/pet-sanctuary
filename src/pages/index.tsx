@@ -11,3 +11,4 @@ Index.getLayout = function getLayout(page: ReactNode) {
 };
 
 export default Index;
+ 
