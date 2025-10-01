@@ -1,22 +1,22 @@
 import React from 'react'
 import Image from 'next/image'
 import { Card, Stack, Typography } from '@mui/material'
-import { LocationOn, Pets, SentimentDissatisfied, SentimentSatisfiedAlt, SentimentVeryDissatisfied } from '@mui/icons-material';
-
-type Status = 'lost' | 'found';
+import { LocationOn, SentimentSatisfiedAlt, SentimentVeryDissatisfied } from '@mui/icons-material';
+import { capitalize } from '@/util/commonUtils';
+import { PetSpecies, PetStatus } from '@/types/Pet';
 
 interface PetCardProps {
     imageUrl?: string;
     name?: string;
-    type: string;
+    species: PetSpecies;
     breed: string;
     description?: string;
     location: string;
     date: string;
-    status: Status;
+    status: PetStatus;
 }
 
-const PetCard = ({ imageUrl, name, type, breed, description, location, date, status }: PetCardProps) => {
+const PetCard = ({ imageUrl, name, species, breed, description, location, date, status }: PetCardProps) => {
   return (
     <Card 
       onClick={() => {}}
@@ -27,7 +27,8 @@ const PetCard = ({ imageUrl, name, type, breed, description, location, date, sta
         '&:hover': { 
           boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.2)' 
       }}}>
-        <Image src={imageUrl || ''} alt={name || breed} />
+        {/* <Image src={imageUrl || ''} width={300} height={200} alt={name || breed} /> */}
+      {imageUrl && <img src={imageUrl} alt={`${name}'s profile`} />}
         <Stack spacing={2} p={4}>
             <Stack direction='row' justifyContent='space-between'>
                 <Stack direction='row' spacing={1}>
@@ -39,7 +40,7 @@ const PetCard = ({ imageUrl, name, type, breed, description, location, date, sta
                   <Typography variant='body1'>{date}</Typography>
                 </Stack>
             </Stack>
-            <Typography variant='h6'>{`${type}, ${name || breed}`}</Typography>
+            <Typography variant='h6'>{`${capitalize(species)}, ${name || breed}`}</Typography>
             {description && <Typography variant='body2'>{description}</Typography>}
         </Stack>
     </Card>
