@@ -4,7 +4,7 @@ import { Add } from '@mui/icons-material'
 
 const GlobalHeader = () => {
   return (
-    <Stack direction='row' justifyContent='space-between' alignItems='center' my={2}>
+    <Stack direction='row' justifyContent='space-between' alignItems='center' my={2} height={40}>
         <Typography variant='h4'>Pet Sanctuary</Typography>
         <Stack direction='row' alignItems='center' spacing={2}>
             <Link href='/'>Home</Link>

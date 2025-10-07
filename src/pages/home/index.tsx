@@ -7,10 +7,10 @@ import Categories from './components/Categories';
 const HomePage = () => {
   return (
     <Container sx={{ pb: 4 }}>
-    <Stack spacing={4}>
-        <HeroSection />
-        <Categories />
-    </Stack>
+      <Stack spacing={4}>
+          <HeroSection />
+          <Categories />
+      </Stack>
     </Container>
   );
 };
