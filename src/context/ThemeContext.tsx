@@ -2,18 +2,18 @@ import { createContext, useState, ReactNode } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { lightTheme, darkTheme } from '../theme';
 
-type ThemeContextType = {
+export type ThemeContextType = {
   mode: boolean;
   toggleTheme: () => void;
 };
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-type Props = {
+type ThemeContextProviderProps = {
   children: ReactNode;
 };
 
-export function ThemeContextProvider({ children }: Props) {
+export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   const [mode, setMode] = useState(false);
 
   const toggleTheme = () => setMode((prev) => !prev);

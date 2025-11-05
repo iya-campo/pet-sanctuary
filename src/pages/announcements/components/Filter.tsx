@@ -1,73 +1,70 @@
-import React, { ChangeEvent, useState } from 'react'
-import { Button, FormControl, FormControlLabel, FormLabel, InputAdornment, InputLabel, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, Stack, TextField } from '@mui/material'
+import React, { ChangeEvent } from 'react'
+import { Button, FormControl, FormControlLabel, InputAdornment, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, Stack, TextField } from '@mui/material'
 import { LocationOn } from '@mui/icons-material';
+import { PetSpecies, PetStatus } from '@/types/Pet';
+import { capitalize } from '@/util/commonUtils';
+import { PET_SPECIE, PET_STATUS } from '@/constants/petConstants';
 
-const Filter = () => {
-    type Option = 'lost' | 'found';
-    type Category = 'Dogs' | 'Cats' | 'Birds' | 'Others';
+interface FilterProps {
+    status: PetStatus;
+    species: PetSpecies;
+    handleStatusChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    handleSpeciesChange: (event: SelectChangeEvent<PetSpecies>) => void;
+    handleClearFilters: () => void;
+}
 
-    const [option, setOption] = useState<Option>();
-    const [category, setCategory] = useState<Category | ''>('');
-
-    const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setOption(event.target.value as Option);
-    }
-
-    const handleCategoryChange = (event: SelectChangeEvent<Category | ''>) => {
-        setCategory(event.target.value as Category | '');
-    }
-  
+const Filter = ({ status, species, handleStatusChange, handleSpeciesChange, handleClearFilters }: FilterProps) => {
     return (
-    <Stack direction='row' alignItems='center' spacing={2}>
-        <FormControl sx={{ flex: 1.5 }}>
-            <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                name="radio-buttons-group"
-                value={option}
-                onChange={handleOptionChange}
-                sx={{ justifyContent: 'space-around' }}
-                row
-            >
-                <FormControlLabel value="lost" control={<Radio />} label="Lost" />
-                <FormControlLabel value="found" control={<Radio />} label="Found" />
-                <FormControlLabel value="adoption" control={<Radio />} label="For Adoption" />
-            </RadioGroup>
-        </FormControl>
-        <TextField
-            variant="outlined"
-            sx={{ flex: 1, ml: 2 }}
-            placeholder='Location'
-            InputProps={{
-                startAdornment: (
-                    <InputAdornment position="start">
-                        <LocationOn />
-                    </InputAdornment>
-                ),
-            }}
-        />
-        <FormControl sx={{ flex: 1 }}>
-            <Select
-                id="category-select"
-                variant='outlined'
-                value={category}
-                onChange={handleCategoryChange}
-                displayEmpty
-                renderValue={(selected: Category | '') => {
-                    if (selected === "") return "Category";
-                    return selected;
+        <Stack direction='row' alignItems='center' spacing={2}>
+            <FormControl sx={{ flex: 1.5 }}>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    name="radio-buttons-group"
+                    value={status}
+                    onChange={handleStatusChange}
+                    sx={{ justifyContent: 'space-around' }}
+                    row
+                >
+                    <FormControlLabel value={PET_STATUS.LOST} control={<Radio />} label="Lost" />
+                    <FormControlLabel value={PET_STATUS.FOUND} control={<Radio />} label="Found" />
+                    <FormControlLabel value={PET_STATUS.FOR_ADOPTION} control={<Radio />} label="For Adoption" />
+                </RadioGroup>
+            </FormControl>
+            <TextField
+                variant="outlined"
+                sx={{ flex: 1, ml: 2 }}
+                placeholder='Location'
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <LocationOn />
+                        </InputAdornment>
+                    ),
                 }}
-            >
-                <MenuItem value="Dogs">Dogs</MenuItem>
-                <MenuItem value="Cats">Cats</MenuItem>
-                <MenuItem value="Birds">Birds</MenuItem>
-                <MenuItem value="Others">Others</MenuItem>
-            </Select>
-        </FormControl>
-        <Button variant='contained' color='primary' sx={{ flex: 1 }}>
-            View All
-        </Button>
-    </Stack>
-  )
+            />
+            <FormControl sx={{ flex: 1 }}>
+                <Select
+                    id="species-select"
+                    variant='outlined'
+                    value={species}
+                    onChange={handleSpeciesChange}
+                    displayEmpty
+                    renderValue={(selected: PetSpecies) => {
+                        if (selected === "" as PetSpecies) return "Species";
+                        return `${capitalize(selected)}s`;
+                    }}
+                >
+                    <MenuItem value={PET_SPECIE.DOG}>Dogs</MenuItem>
+                    <MenuItem value={PET_SPECIE.CAT}>Cats</MenuItem>
+                    <MenuItem value={PET_SPECIE.BIRD}>Birds</MenuItem>
+                    <MenuItem value="OTHERS">Others</MenuItem>
+                </Select>
+            </FormControl>
+            <Button variant='contained' color='primary' sx={{ flex: 1 }} onClick={handleClearFilters}>
+                View All
+            </Button>
+        </Stack>
+    )
 }
 
 export default Filter

@@ -1,17 +1,15 @@
 import React, { ReactNode } from 'react'
 import Layout from '@/components/Layout';
-import { Container, Stack, Typography } from '@mui/material';
+import { Stack } from '@mui/material';
 import HeroSection from './components/HeroSection';
 import Categories from './components/Categories';
 
 const HomePage = () => {
   return (
-    <Container sx={{ pb: 4 }}>
-      <Stack spacing={4}>
-          <HeroSection />
-          <Categories />
-      </Stack>
-    </Container>
+    <Stack spacing={4} pb={4}>
+        <HeroSection />
+        <Categories />
+    </Stack>
   );
 };
 

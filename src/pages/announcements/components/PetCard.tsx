@@ -1,9 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import { Card, Stack, Typography } from '@mui/material'
-import { LocationOn, SentimentSatisfiedAlt, SentimentVeryDissatisfied } from '@mui/icons-material';
-import { capitalize } from '@/util/commonUtils';
+import { LocationOn, SentimentNeutral, SentimentSatisfiedAlt, SentimentVeryDissatisfied } from '@mui/icons-material';
+import { capitalize, formatDate } from '@/util/commonUtils';
 import { PetSpecies, PetStatus } from '@/types/Pet';
+import { PET_STATUS } from '@/constants/petConstants';
 
 interface PetCardProps {
     imageUrl?: string;
@@ -31,13 +32,17 @@ const PetCard = ({ imageUrl, name, species, breed, description, location, date, 
       {imageUrl && <img src={imageUrl} alt={`${name}'s profile`} />}
         <Stack spacing={2} p={4}>
             <Stack direction='row' justifyContent='space-between'>
-                <Stack direction='row' spacing={1}>
+                <Stack direction='row' spacing={0.5}>
                   <LocationOn />
                   <Typography variant='body1'>{location}</Typography>
                 </Stack>
-                <Stack direction='row' spacing={1}>
-                  {status === 'found' ? <SentimentSatisfiedAlt /> : <SentimentVeryDissatisfied />}
-                  <Typography variant='body1'>{date}</Typography>
+                <Stack direction='row' spacing={0.5}>
+                  {
+                    status === PET_STATUS.FOUND ? <SentimentSatisfiedAlt /> : 
+                    status === PET_STATUS.LOST ? <SentimentVeryDissatisfied /> :
+                    <SentimentNeutral />
+                  }
+                  <Typography variant='body1'>{formatDate(date.toString())}</Typography>
                 </Stack>
             </Stack>
             <Typography variant='h6'>{`${capitalize(species)}, ${name || breed}`}</Typography>

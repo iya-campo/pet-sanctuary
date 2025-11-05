@@ -31,7 +31,7 @@ const MessagesSection = () => {
               key={msg.id}
               name={msg.user.name}
               message={msg.message}
-              imgUrl={msg.user.imgUrl}
+              imgUrl={msg.user.imgUrl as string}
             />
           )) : (
             <Typography>No messages yet.</Typography>

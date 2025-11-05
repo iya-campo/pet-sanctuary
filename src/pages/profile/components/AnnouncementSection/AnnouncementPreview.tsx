@@ -1,13 +1,14 @@
+import { PET_STATUS } from '@/constants/petConstants';
 import { PetStatus } from '@/types/Pet'
-import { capitalize } from '@/util/commonUtils';
+import { capitalize, formatDate } from '@/util/commonUtils';
 import { Box, Stack, Typography } from '@mui/material';
 import React from 'react'
 
 type AnnouncementPreviewProps = {
-  status: PetStatus;
   name: string;
+  status: PetStatus;
+  date: Date;
   desc?: string;
-  date: string;
   imgUrl?: string;
 }
 
@@ -27,8 +28,8 @@ const AnnouncementPreview = ({ status, name, desc, date, imgUrl }: AnnouncementP
       />
       <Stack flex={1}>
         <Stack direction='row' justifyContent='space-between' alignItems='center'>
-          <Typography variant='caption' color={status === 'Lost' ? 'error' : 'primary'}>{capitalize(status)}</Typography>
-          <Typography variant='caption'>{date}</Typography>
+          <Typography variant='caption' color={status === PET_STATUS.LOST ? 'error' : 'primary'}>{capitalize(status)}</Typography>
+          <Typography variant='caption'>{formatDate(date?.toString())}</Typography>
         </Stack>
         <Typography variant='h6'>{name}</Typography>
         <Typography variant='body2'>{desc}</Typography>
