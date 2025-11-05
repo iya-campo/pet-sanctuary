@@ -1,3 +1,5 @@
+import { Pet } from "./Pet";
+
 export interface User {
   id: number;
   name: string;
@@ -6,4 +8,6 @@ export interface User {
   location: string;
   bio?: string;
   imgUrl?: string;
+  pets: Pet[];
+  adoptedPets: Pet[];
 }

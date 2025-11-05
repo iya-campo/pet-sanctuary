@@ -1,19 +1,26 @@
-export type PetStatus = 'Lost' | 'Found' | 'For Adoption';
+import { User } from "./User";
 
-export type PetSpecies = 'dog' | 'cat' | 'bird';
+export type PetStatus = 'LOST' | 'FOUND' | 'FOR ADOPTION' | 'ADOPTED' | 'CLOSED';
+
+export type PetSpecies = 'DOG' | 'CAT' | 'BIRD';
+
+export type Gender = 'MALE' | 'FEMALE';
 
 export interface Pet {
     id: number;
+    createdAt: Date;
     name: string;
     species: PetSpecies;
     breed: string;
     coat: string;
-    height?: string;
+    age?: number;
+    gender: Gender;
     location: string;
-    date: string;
-    contact: string;
-    mobile: string;
     desc?: string;
-    status: PetStatus;
+    type: PetStatus;
     imgUrl?: string;
+    user: User;
+    userId: number;
+    adopter?: User | null;
+    adopterId?: number | null;
 }

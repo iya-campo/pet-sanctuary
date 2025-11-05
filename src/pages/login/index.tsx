@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import { Container, Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Stack, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import React, { ReactNode, useState } from 'react'
 import LoginUI from './components/LoginUI';
 import SignupUI from './components/SignupUI';
@@ -16,23 +16,21 @@ const LoginPage = () => {
     };
 
     return (
-        <Container>
-            <Stack alignItems='center' spacing={2} mt={16} height={`calc(100vh - ${HEADER_HEIGHT}px)`}>
-                <Typography variant='h4' gutterBottom>
-                    Welcome
-                </Typography>
-                <ToggleButtonGroup
-                    exclusive
-                    value={authMode}
-                    onChange={handleChange}
-                    sx={{ width: 250 }}
-                >
-                    <ToggleButton fullWidth value="login">Login</ToggleButton>
-                    <ToggleButton fullWidth value="signup">Signup</ToggleButton>
-                </ToggleButtonGroup>
-                {authMode === 'login' ? <LoginUI /> : <SignupUI />}
-            </Stack>
-        </Container>
+        <Stack alignItems='center' spacing={2} mt={16} height={`calc(100vh - ${HEADER_HEIGHT}px)`}>
+            <Typography variant='h4' gutterBottom>
+                Welcome
+            </Typography>
+            <ToggleButtonGroup
+                exclusive
+                value={authMode}
+                onChange={handleChange}
+                sx={{ width: 250 }}
+            >
+                <ToggleButton fullWidth value="login">Login</ToggleButton>
+                <ToggleButton fullWidth value="signup">Signup</ToggleButton>
+            </ToggleButtonGroup>
+            {authMode === 'login' ? <LoginUI /> : <SignupUI />}
+        </Stack>
     )
 }
 

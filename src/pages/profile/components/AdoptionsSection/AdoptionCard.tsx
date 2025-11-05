@@ -1,10 +1,23 @@
+import { Box, Typography } from '@mui/material';
 import React from 'react'
 
-const AdoptionCard = () => {
+interface AdoptionCardProps {
+  name: string;
+  imageUrl?: string;
+}
+
+const AdoptionCard = ({ name, imageUrl }: AdoptionCardProps) => {
   return (
-    <div>
-      Adoption Card
-    </div>
+    <Box 
+      position='relative'
+      bgcolor='#ddd' 
+      borderRadius={2} 
+      height={150} 
+      width={100} 
+      textAlign='center'
+      >
+        <Typography position='absolute' width='100%' sx={{ bottom: 10 }}>{name}</Typography>
+    </Box>
   )
 }
 
