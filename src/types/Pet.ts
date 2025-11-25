@@ -24,3 +24,9 @@ export interface Pet {
     adopter?: User | null;
     adopterId?: number | null;
 }
+
+export interface PetsState {
+  list: Pet[];
+  loading: boolean;
+  error: string | null;
+}
