@@ -11,14 +11,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  images: {
-    domains: ['raw.githubusercontent.com'],
-    loader: 'akamai',
-    path: '',
-    unoptimized: true,
-  },
-  trailingSlash: true,
-  basePath: '/pet-sanctuary',
   eslint: {
     ignoreDuringBuilds: true, // temp
   },

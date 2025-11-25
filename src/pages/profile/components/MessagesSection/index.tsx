@@ -10,7 +10,7 @@ const MessagesSection = () => {
     // Fetch messages from the backend here
     const fetchMessages = async () => {
       try {
-        const response = await fetch('/pet-sanctuary/api/messages');
+        const response = await fetch('/api/messages');
         const data = await response.json();
         // Handle the fetched messages
         setMessages([data[0]] as any);

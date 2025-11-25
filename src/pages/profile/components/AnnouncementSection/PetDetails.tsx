@@ -75,7 +75,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleUpdatePet = async (updatedPet: Partial<Pet>) => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { 
+    const response = await fetch(`/api/pets/${pet.id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(updatedPet) 
@@ -92,7 +92,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleDeletePet = async () => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { method: 'DELETE' });
+    const response = await fetch(`/api/pets/${pet.id}`, { method: 'DELETE' });
 
     if (response.ok) {
         setLoading(LOADING_STATUS.SUCCESS);
@@ -106,7 +106,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleMarkClosed = async (closedPet: Partial<Pet>) => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { 
+    const response = await fetch(`/api/pets/${pet.id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({

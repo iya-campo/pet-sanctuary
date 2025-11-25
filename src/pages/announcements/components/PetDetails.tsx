@@ -24,7 +24,7 @@ const PetDetails = ({ pet, open, onClose, onChange }: PetDetailsProps) => {
 
   const handleAdoptPet = async () => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/pet-sanctuary/api/pets/adopt`, {
+    const response = await fetch(`/api/pets/adopt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

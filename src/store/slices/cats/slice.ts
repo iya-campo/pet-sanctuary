@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 export const fetchCats = createAsyncThunk<Cat[]>(
   'cats/fetchCats',
   async () => {
-    const response = await fetch('/pet-sanctuary/api/cats'); // Example API endpoint
+    const response = await fetch('/api/cats'); // Example API endpoint
     if (!response.ok) throw new Error('Failed to fetch cats');
     return response.json();
   }
