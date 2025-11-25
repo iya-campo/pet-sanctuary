@@ -17,3 +17,8 @@ export const formatDate = (dateString: string) => {
   
   return `${month.toString().padStart(2, '0')}.${day.toString().padStart(2, '0')}.${year}`;
 }
+
+export const generateRandomId = () => {
+    const randomId = Math.random().toString(36).substr(2, 9);
+    return randomId;
+};

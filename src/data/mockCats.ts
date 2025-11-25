@@ -1,0 +1,8 @@
+export const mockCats: Cat[] = [
+  { id: '1', name: 'Whiskers', desc: 'Whiskers is a curious and independent Siamese cat. She enjoys exploring new places and is very playful. Her sleek coat requires regular grooming, and she gets along well with other pets, especially cats.' },
+  { id: '2', name: 'Shadow', desc: 'Shadow is a calm and reserved Persian cat. He loves lounging around the house and enjoys the company of quiet environments. His fluffy coat requires frequent grooming, and he prefers to stay indoors.' },
+  { id: '3', name: 'Bella', desc: 'Bella is an energetic and mischievous Maine Coon. She loves playing with toys and climbing high places. Her long coat requires regular grooming, and she is very friendly with children and other animals.' },
+  { id: '4', name: 'Oliver', desc: 'Oliver is an affectionate and playful British Shorthair. He enjoys chasing after laser pointers and curling up in cozy spots. His short coat is easy to maintain, and he gets along well with dogs.' },
+  { id: '5', name: 'Luna', desc: 'Luna is a gentle and graceful Ragdoll cat. She loves being held and pampered. Her soft coat requires minimal grooming, and she has a laid-back personality that makes her perfect for families with children.' },
+  { id: '6', name: 'Cleo', desc: 'Cleo is a social and affectionate Bengal cat. She loves climbing trees and exploring outdoor spaces. Her short coat requires minimal grooming, and she thrives in a lively household with plenty of activity.' },
+];
