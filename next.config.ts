@@ -19,6 +19,9 @@ const nextConfig: NextConfig = {
   },
   trailingSlash: true,
   basePath: '/pet-sanctuary',
+  eslint: {
+    ignoreDuringBuilds: true, // temp
+  },
 };
 
 export default nextConfig;

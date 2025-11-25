@@ -10,7 +10,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0101',
       location: 'New York, NY',
       bio: 'Animal lover and volunteer.',
-      imgUrl: 'https://randomuser.me/api/portraits/men/1.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/men/1.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Hey, how are you doing? Let me know if you need anything!'
   },
@@ -23,7 +25,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0102',
       location: 'Los Angeles, CA',
       bio: 'Designer and pet foster parent.',
-      imgUrl: 'https://randomuser.me/api/portraits/women/2.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/women/2.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Could you send me the latest design files? Thanks!'
   },
@@ -36,7 +40,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0103',
       location: 'Chicago, IL',
       bio: 'Project manager and dog owner.',
-      imgUrl: 'https://randomuser.me/api/portraits/men/3.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/men/3.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Looking forward to our meeting tomorrow. Let me know if you need anything from me.'
   },
@@ -49,7 +55,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0104',
       location: 'Houston, TX',
       bio: 'Cat enthusiast and event planner.',
-      imgUrl: 'https://randomuser.me/api/portraits/women/4.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/women/4.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'I just finished the project. I’ll send over the report by the end of the day.'
   },
@@ -62,7 +70,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0105',
       location: 'Seattle, WA',
       bio: 'Tech lead and animal shelter supporter.',
-      imgUrl: 'https://randomuser.me/api/portraits/men/5.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/men/5.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Hey, just wanted to check in. Do you need help with the new app launch?'
   },
@@ -75,7 +85,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0106',
       location: 'Boston, MA',
       bio: 'Volunteer and animal rights advocate.',
-      imgUrl: 'https://randomuser.me/api/portraits/women/6.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/women/6.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'I’ll be in the office later today. Let me know if you need me to bring anything.'
   },
@@ -88,7 +100,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0107',
       location: 'Denver, CO',
       bio: 'Presentation expert and pet owner.',
-      imgUrl: 'https://randomuser.me/api/portraits/men/7.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/men/7.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Can you confirm the schedule for the meeting next week? I’ll bring the presentation.'
   },
@@ -101,7 +115,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0108',
       location: 'San Francisco, CA',
       bio: 'Marketing specialist and animal lover.',
-      imgUrl: 'https://randomuser.me/api/portraits/women/8.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/women/8.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'I’m finalizing the marketing materials for the launch. Expect them by tomorrow.'
   },
@@ -114,7 +130,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0109',
       location: 'Austin, TX',
       bio: 'Photographer and pet rescuer.',
-      imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/men/9.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Can we reschedule the photoshoot? I have a conflict with the original time.'
   },
@@ -127,7 +145,9 @@ export const mockMessages: Message[] = [
       mobile: '555-0110',
       location: 'Miami, FL',
       bio: 'Task coordinator and animal shelter volunteer.',
-      imgUrl: 'https://randomuser.me/api/portraits/women/10.jpg'
+      imgUrl: 'https://randomuser.me/api/portraits/women/10.jpg',
+      pets: [],
+      adoptedPets: [],
     },
     message: 'Just wanted to follow up on the task. Let me know if I can assist in any way.'
   }

@@ -46,14 +46,14 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
   const formik = useFormik<FormData>({
     enableReinitialize: true,
     initialValues: {
-        name: pet.name || '',
-        age: pet.age || 0,
-        gender: pet.gender || '' as Gender,
-        species: pet.species || '' as PetSpecies,
-        breed: pet.breed || '',
-        location: pet.location || '',
-        desc: pet.desc || '',
-        imgUrl: pet.imgUrl || '',
+        name: pet?.name || '',
+        age: pet?.age || 0,
+        gender: pet?.gender || '' as Gender,
+        species: pet?.species || '' as PetSpecies,
+        breed: pet?.breed || '',
+        location: pet?.location || '',
+        desc: pet?.desc || '',
+        imgUrl: pet?.imgUrl || '',
     },
     validationSchema: Yup.object({
         name: Yup.string().required('Name is required'),
@@ -75,7 +75,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleUpdatePet = async (updatedPet: Partial<Pet>) => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/api/pets/${pet.id}`, { 
+    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify(updatedPet) 
@@ -92,7 +92,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleDeletePet = async () => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/api/pets/${pet.id}`, { method: 'DELETE' });
+    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { method: 'DELETE' });
 
     if (response.ok) {
         setLoading(LOADING_STATUS.SUCCESS);
@@ -106,7 +106,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
 
   const handleMarkClosed = async (closedPet: Partial<Pet>) => {
     setLoading(LOADING_STATUS.PENDING);
-    const response = await fetch(`/api/pets/${pet.id}`, { 
+    const response = await fetch(`/pet-sanctuary/api/pets/${pet.id}`, { 
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({
@@ -186,7 +186,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
                                 )}
                             </Stack>
                         </Stack>
-                        <Typography variant='h6'>{`${pet?.type === PET_STATUS.FOR_ADOPTION ? 'For Adoption' : capitalize(pet?.type)} / ${capitalize(pet?.name ? pet.name : pet?.species)}`}</Typography>
+                        <Typography variant='h6'>{`${pet?.type === PET_STATUS.FOR_ADOPTION ? 'For Adoption' : capitalize(pet?.type)} / ${capitalize(pet?.name ? pet?.name : pet?.species)}`}</Typography>
                     </Stack>
                     <DynamicField label='ID' value={pet?.id?.toString()} />
                     <DynamicField label='species' value={capitalize(formik.values.species)} formik={formik} editMode={editMode} formType='option' 

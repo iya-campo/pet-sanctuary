@@ -76,7 +76,7 @@ const AnnouncementsSection = () => {
             onClose={handleClose} 
             editMode={editMode} 
             setEditMode={setEditMode} 
-            onPetChange={handlePetChange}
+            onChange={handlePetChange}
           />
         </Stack>
     </Stack>

@@ -42,7 +42,7 @@ const PetCard = ({ imageUrl, name, species, breed, description, location, date, 
                     status === PET_STATUS.LOST ? <SentimentVeryDissatisfied /> :
                     <SentimentNeutral />
                   }
-                  <Typography variant='body1'>{formatDate(date.toString())}</Typography>
+                  <Typography variant='body1'>{formatDate(date)}</Typography>
                 </Stack>
             </Stack>
             <Typography variant='h6'>{`${capitalize(species)}, ${name || breed}`}</Typography>

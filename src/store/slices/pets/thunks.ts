@@ -5,7 +5,7 @@ import { Pet } from "@/types/Pet";
 export const fetchPets = createAsyncThunk<Pet[]>(
   "pets/fetchPets",
   async () => {
-    const res = await fetch("/api/pets");
+    const res = await fetch("/pet-sanctuary/api/pets");
     if (!res.ok) throw new Error("Failed to fetch pets");
     return (await res.json()) as Pet[];
   }
@@ -15,7 +15,7 @@ export const fetchPets = createAsyncThunk<Pet[]>(
 export const addPet = createAsyncThunk<Pet, Omit<Partial<Pet>, "id">>(
   "pets/addPet",
   async (newPet) => {
-    const res = await fetch("/api/pets", {
+    const res = await fetch("/pet-sanctuary/api/pets", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPet),
@@ -30,7 +30,7 @@ export const updatePet = createAsyncThunk<
   Pet,
   { id: number; updates: Partial<Pet> }
 >("pets/updatePet", async ({ id, updates }) => {
-  const res = await fetch(`/api/pets/${id}`, {
+  const res = await fetch(`/pet-sanctuary/api/pets/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updates),
@@ -43,7 +43,7 @@ export const updatePet = createAsyncThunk<
 export const deletePet = createAsyncThunk<number, number>(
   "pets/deletePet",
   async (id) => {
-    const res = await fetch(`/api/pets/${id}`, { method: "DELETE" });
+    const res = await fetch(`/pet-sanctuary/api/pets/${id}`, { method: "DELETE" });
     if (!res.ok) throw new Error("Failed to remove pet");
     return id;
   }
