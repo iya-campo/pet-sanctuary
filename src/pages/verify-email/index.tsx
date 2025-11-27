@@ -18,7 +18,7 @@ const index = () => {
 
   useEffect(() => {
     if (token && typeof token === 'string') {
-      fetch(`http://localhost:4000/auth/verify-email?token=${token}`)
+      fetch(`https://pet-sanctuary-api.vercel.app/auth/verify-email?token=${token}`)
         .then((res) => res.json())
         .then((data) => setMessage(data.message || 'Email verification successful.'))
         .catch((err) => {
