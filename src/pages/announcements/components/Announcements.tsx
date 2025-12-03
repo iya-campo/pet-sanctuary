@@ -88,7 +88,7 @@ const Announcements = ({
             {pets?.length > 0 ? pets.map((pet: Pet) => (
               <Grid size={4} key={pet.id} onClick={() => handlePetSelect(pet)}>
                 <PetCard
-                  imageUrl={pet.imgUrl}
+                  imageUrls={pet.imageUrls}
                   name={pet.name}
                   species={pet.species}
                   breed={pet.breed}

@@ -25,6 +25,7 @@ const AnnouncementsSection = () => {
   const handleClose = () => {
     setOpen(false);
     setEditMode(false);
+    setPetData({} as Pet);
   }
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const AnnouncementsSection = () => {
                   name={pet?.name}
                   desc={pet?.desc}
                   date={pet?.createdAt}
-                  imgUrl={pet?.imgUrl}
+                  imageUrls={pet?.imageUrls}
                 />
               </Grid>
             )) : (

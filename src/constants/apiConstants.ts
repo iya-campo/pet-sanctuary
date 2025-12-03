@@ -1,9 +1,11 @@
-
 export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://pet-sanctuary-api.vercel.app';
+// export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
 // Internal API Endpoints (server-side API routes)
 export const LOGIN_API = `${BASE_URL}/auth/login`;
 export const LOGOUT_API = `${BASE_URL}/auth/logout`;
 export const REGISTRATION_API = `${BASE_URL}/auth/register`;
+export const VERIFICATION_API = `${BASE_URL}/auth/verify-email`;
+
 export const USERS_API = `${BASE_URL}/users`;
 export const PETS_API = `${BASE_URL}/pets`;

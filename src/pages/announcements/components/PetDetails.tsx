@@ -9,6 +9,7 @@ import DynamicField from '@/components/DynamicField';
 import ConfirmationDialog from '@/components/ConfirmationDialog';
 import { LoadingStatus } from '@/types/Loading';
 import { LOADING_STATUS } from '@/constants/loadingConstants';
+import { BASE_URL } from '@/constants/apiConstants';
 
 interface PetDetailsProps {
     pet: Pet;
@@ -19,8 +20,8 @@ interface PetDetailsProps {
 
 const PetDetails = ({ pet, open, onClose, onChange }: PetDetailsProps) => {
   const { user, isAuthenticated } = useAuth();
+  const [ loading, setLoading ] = useState<LoadingStatus>(LOADING_STATUS.IDLE);
   const [ dialogOpen, setDialogOpen ] = useState<boolean>(false);
-  const [loading, setLoading] = useState<LoadingStatus>(LOADING_STATUS.IDLE);
 
   const handleAdoptPet = async () => {
     setLoading(LOADING_STATUS.PENDING);
@@ -58,11 +59,31 @@ const PetDetails = ({ pet, open, onClose, onChange }: PetDetailsProps) => {
                 <Stack spacing={2} flex='1 0 550px'>
                     <Stack direction='row' spacing={2}>
                         <Stack spacing={2}>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
+                            {[0, 1, 2].map((_, index) => (
+                                <Box 
+                                    key={index}
+                                    height={150} 
+                                    width={150} 
+                                    bgcolor='#ddd' 
+                                    sx={{
+                                        backgroundImage: `url(${BASE_URL}${pet?.imageUrls?.split(',')[index + 1]})`,
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                        backgroundRepeat: 'no-repeat'
+                                    }}
+                                />
+                            ))}
                         </Stack>
-                        <Box bgcolor='#ddd' flex={1}></Box>
+                        <Box 
+                            flex={1}
+                            bgcolor='#ddd' 
+                            sx={{
+                                backgroundImage: `url(${BASE_URL}${pet?.imageUrls?.split(',')[0]})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat'
+                            }}
+                        />
                     </Stack>
                     <Stack direction='row' alignSelf='center' alignItems='center' spacing={2}>
                         <Button variant='contained' size='small'><ArrowLeft /></Button>

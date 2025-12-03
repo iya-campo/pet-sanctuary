@@ -11,6 +11,7 @@ import DynamicField from '@/components/DynamicField';
 import ConfirmationDialog, { ConfirmationDialogProps } from '@/components/ConfirmationDialog';
 import { LoadingStatus } from '@/types/Loading';
 import { LOADING_STATUS } from '@/constants/loadingConstants';
+import { BASE_URL } from '@/constants/apiConstants';
 
 interface PetDetailsProps {
     pet: Pet;
@@ -29,12 +30,17 @@ type FormData = {
     breed: string;
     location: string;
     desc: string;
-    imgUrl: string;
+    imageUrls: string;
 }
 
 const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: PetDetailsProps) => {
   const { user } = useAuth();
-  const [loading, setLoading] = useState<LoadingStatus>(LOADING_STATUS.IDLE);
+  const [ loading, setLoading ] = useState<LoadingStatus>(LOADING_STATUS.IDLE);
+  
+  const imageArray = Array.from({ length: 4 }, (_, index) => pet.imageUrls?.split(',')[index] || '');
+  const [ selectedImageIndex, setSelectedImageIndex ] = useState<number>(0);
+  const [ lastImageIndex, setLastImageIndex ] = useState<number>(0);
+
   const [ dialogOpen, setDialogOpen ] = useState<boolean>(false);
   const [ dialogProps, setDialogProps ] = useState<Partial<ConfirmationDialogProps>>({
     id: 'dialog-id',
@@ -42,6 +48,11 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
     message: 'Are you sure you want to proceed?',
     onConfirm: async () => {},
   })
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+    setLastImageIndex(0);
+  }, [pet])
 
   const formik = useFormik<FormData>({
     enableReinitialize: true,
@@ -53,7 +64,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
         breed: pet?.breed || '',
         location: pet?.location || '',
         desc: pet?.desc || '',
-        imgUrl: pet?.imgUrl || '',
+        imageUrls: pet?.imageUrls || '',
     },
     validationSchema: Yup.object({
         name: Yup.string().required('Name is required'),
@@ -135,6 +146,13 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
     })
   }
 
+  const handleImageSelect = (imageIndex: number) => {
+    setSelectedImageIndex((prev) => {
+        setLastImageIndex(prev);
+        return imageIndex;
+    });
+  }
+
   return (
     <Modal open={open} onClose={onClose}>
         <Box position='relative' top='50%' left='50%' sx={{ transform: 'translate(-50%, -50%)' }} maxHeight='80vh' maxWidth='100vh' overflow='auto' bgcolor='white' borderRadius={2}>
@@ -147,11 +165,33 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
                 <Stack spacing={2} flex='1 0 500px'>
                     <Stack direction='row' spacing={2}>
                         <Stack spacing={2}>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
-                            <Box height={150} width={150} bgcolor='#ddd'></Box>
+                            {imageArray.slice(1).map((image, index) => (
+                                <Box 
+                                    key={image}
+                                    height={150} 
+                                    width={150} 
+                                    bgcolor='#ddd' 
+                                    onClick={() => image ? handleImageSelect(index + 1) : null}
+                                    sx={{
+                                        backgroundImage: `url(${BASE_URL}${image})`,
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                        backgroundRepeat: 'no-repeat',
+                                        cursor: image ? 'pointer' : 'default',
+                                    }}
+                                />
+                            ))}
                         </Stack>
-                        <Box bgcolor='#ddd' flex={1}></Box>
+                        <Box 
+                            flex={1}
+                            bgcolor='#ddd' 
+                            sx={{
+                                backgroundImage: `url(${BASE_URL}${pet?.imageUrls?.split(',')[selectedImageIndex]})`,
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                backgroundRepeat: 'no-repeat'
+                            }}
+                        />
                     </Stack>
                     <Stack direction='row' alignSelf='center' alignItems='center' spacing={2}>
                         <Button variant='contained' size='small'><ArrowLeft /></Button>

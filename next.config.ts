@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  images: { 
+    domains: ['localhost', 'pet-sanctuary.vercel.app'],
+  },
   eslint: {
     ignoreDuringBuilds: true, // temp
   },

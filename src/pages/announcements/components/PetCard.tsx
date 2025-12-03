@@ -1,13 +1,13 @@
 import React from 'react'
-import Image from 'next/image'
-import { Card, Stack, Typography } from '@mui/material'
+import { Box, Card, Stack, Typography } from '@mui/material'
 import { LocationOn, SentimentNeutral, SentimentSatisfiedAlt, SentimentVeryDissatisfied } from '@mui/icons-material';
 import { capitalize, formatDate } from '@/util/commonUtils';
 import { PetSpecies, PetStatus } from '@/types/Pet';
 import { PET_STATUS } from '@/constants/petConstants';
+import { BASE_URL } from '@/constants/apiConstants';
 
 interface PetCardProps {
-    imageUrl?: string;
+    imageUrls: string;
     name?: string;
     species: PetSpecies;
     breed: string;
@@ -17,7 +17,7 @@ interface PetCardProps {
     status: PetStatus;
 }
 
-const PetCard = ({ imageUrl, name, species, breed, description, location, date, status }: PetCardProps) => {
+const PetCard = ({ imageUrls, name, species, breed, description, location, date, status }: PetCardProps) => {
   return (
     <Card 
       onClick={() => {}}
@@ -28,8 +28,17 @@ const PetCard = ({ imageUrl, name, species, breed, description, location, date, 
         '&:hover': { 
           boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.2)' 
       }}}>
-        {/* <Image src={imageUrl || ''} width={300} height={200} alt={name || breed} /> */}
-      {imageUrl && <img src={imageUrl} alt={`${name}'s profile`} />}
+        <Box 
+            flex={1}
+            bgcolor='#ddd' 
+            height={250}
+            sx={{
+                backgroundImage: imageUrls ? `url(${BASE_URL}${imageUrls.split(',')[0]})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+            }}
+        />
         <Stack spacing={2} p={4}>
             <Stack direction='row' justifyContent='space-between'>
                 <Stack direction='row' spacing={0.5}>
@@ -46,7 +55,11 @@ const PetCard = ({ imageUrl, name, species, breed, description, location, date, 
                 </Stack>
             </Stack>
             <Typography variant='h6'>{`${capitalize(species)}, ${name || breed}`}</Typography>
-            {description && <Typography variant='body2'>{description}</Typography>}
+            {description && (
+              <Box sx={{ maxHeight: 80, overflow: 'auto' }}>
+                <Typography variant='body2'>{description}</Typography>
+              </Box>
+            )}
         </Stack>
     </Card>
   )

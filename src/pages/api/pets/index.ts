@@ -48,9 +48,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             breed, 
             location, 
             desc,
+            imageUrls,
             userId
         } = req.body;
-        
         const missingFields = validateRequiredFields(req.body, ['name', 'age', 'breed', 'location']);
         if (missingFields) {
           return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
@@ -65,23 +65,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             breed,
             location,
             desc,
+            imageUrls,
             userId,
         };
 
-        const response = await fetch(PETS_API, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newPet),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to add pet');
-        }
-        
-        const data = await response.json();
-
-        return res.status(201).json(data);
+        return res.status(201).json(newPet);
     }
     return res.status(405).json({ error: 'Method Not Allowed' });
   } catch (error) {

@@ -13,7 +13,12 @@ const AdoptionsSection = () => {
         <Stack direction='row' gap={2} flexWrap='wrap'>
           {
             (user?.adoptedPets?.length ?? 0) > 0 ?
-              user?.adoptedPets?.map((pet: Pet, index: number) => <AdoptionCard key={index} name={pet.name} />)
+              user?.adoptedPets?.map((pet: Pet) => (
+                <AdoptionCard 
+                  key={pet.id} 
+                  name={pet.name} 
+                  imageUrls={pet.imageUrls} />
+              ))
               : <Typography>No adoptions yet.</Typography>
           }
         </Stack>
