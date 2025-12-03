@@ -37,7 +37,7 @@ const PetDetails = ({ pet, open, onClose, editMode, setEditMode, onChange }: Pet
   const { user } = useAuth();
   const [ loading, setLoading ] = useState<LoadingStatus>(LOADING_STATUS.IDLE);
   
-  const imageArray = Array.from({ length: 4 }, (_, index) => pet.imageUrls?.split(',')[index] || '');
+  const imageArray = Array.from({ length: 4 }, (_, index) => pet?.imageUrls?.split(',')[index] || '');
   const [ selectedImageIndex, setSelectedImageIndex ] = useState<number>(0);
   const [ lastImageIndex, setLastImageIndex ] = useState<number>(0);
 
