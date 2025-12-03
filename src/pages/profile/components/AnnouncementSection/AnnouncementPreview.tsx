@@ -1,3 +1,4 @@
+import { BASE_URL } from '@/constants/apiConstants';
 import { PET_STATUS } from '@/constants/petConstants';
 import { PetStatus } from '@/types/Pet'
 import { capitalize, formatDate } from '@/util/commonUtils';
@@ -9,10 +10,10 @@ type AnnouncementPreviewProps = {
   status: PetStatus;
   date: Date;
   desc?: string;
-  imgUrl?: string;
+  imageUrls?: string;
 }
 
-const AnnouncementPreview = ({ status, name, desc, date, imgUrl }: AnnouncementPreviewProps) => {
+const AnnouncementPreview = ({ status, name, desc, date, imageUrls }: AnnouncementPreviewProps) => {
   return (
     <Stack direction='row' spacing={2}>
       <Box
@@ -20,11 +21,11 @@ const AnnouncementPreview = ({ status, name, desc, date, imgUrl }: AnnouncementP
         bgcolor={'#ccc'}
         flex={0.5}
         sx={{
-          backgroundImage: imgUrl ? `url(${imgUrl})` : undefined,
+          backgroundImage: imageUrls ? `url(${BASE_URL}${imageUrls.split(',')[0]})` : 'none',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundColor: '#ccc',
-        }}
+          backgroundRepeat: 'no-repeat'
+      }}
       />
       <Stack flex={1}>
         <Stack direction='row' justifyContent='space-between' alignItems='center'>

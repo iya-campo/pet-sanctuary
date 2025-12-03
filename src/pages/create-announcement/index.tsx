@@ -9,6 +9,7 @@ import { useFormik } from 'formik';
 import { Gender, Pet, PetSpecies, PetStatus } from '@/types/Pet';
 import { useAuth } from '@/hooks/useAuth';
 import { GENDER, PET_SPECIE, PET_STATUS } from '@/constants/petConstants';
+import { PETS_API } from '@/constants/apiConstants';
 
 type FormData = {
     type: PetStatus;
@@ -19,35 +20,97 @@ type FormData = {
     breed: string;
     location: string;
     desc: string;
-    imgUrl: string;
+    imageUrls: (File | null)[];
     userId: number;
+}
+
+const DEFAULT_VALUES = {
+    type: PET_STATUS.LOST,
+    name: 'Max',
+    age: 4,
+    gender: GENDER.MALE,
+    species: PET_SPECIE.DOG,
+    breed: 'Siberian Husky',
+    coat: 'Solid black',
+    location: 'Texas',
+    desc: 'He a gud boi fr',
+    imageUrls: [null, null, null, null, null],
+    userId: 0,
 }
 
 const CreateAnnouncementPage = () => {
     const { user } = useAuth();
-    const [files, setFiles] = useState<File[]>(['', '', '', '', ''] as unknown as File[]);
+    const [files, setFiles] = useState<(File | null)[]>(DEFAULT_VALUES.imageUrls);
+    const [previews, setPreviews] = useState<string[]>(['', '', '', '', '']);
 
-    const handleCreatePet = async (newPet: Pet) => {
-      await fetch('api/pets', { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify(newPet) 
-      });
+    const handleCreatePet = async (newPet: FormData) => {
+        const formData = new FormData();
+
+        formData.append('type', newPet.type);
+        formData.append('name',newPet. name);
+        formData.append('age', newPet.age.toString());
+        formData.append('gender', newPet.gender);
+        formData.append('species', newPet.species);
+        formData.append('breed', newPet.breed);
+        formData.append('location', newPet.location);
+        formData.append('desc', newPet.desc);
+        formData.append('userId', newPet.userId.toString());
+
+        newPet.imageUrls.forEach((file: File | null) => {
+            if (file) formData.append('imageUrls', file);
+        });
+
+        const response = await fetch(PETS_API, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to add pet');
+        }
+        
+        const data = await response.json();
+        
+        await fetch('api/pets', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(data) 
+        });
+        
+        console.log('Form data submitted:', data);
+    };
+
+    const handleFileChange = (index: number, file: File | null) => {
+        const newFiles = [...files];
+        const newPreviews = [...previews];
+
+        newFiles[index] = file;
+
+        if (file) {
+            newPreviews[index] = URL.createObjectURL(file);
+        } else {
+            newPreviews[index] && URL.revokeObjectURL(newPreviews[index]); // free memory
+            newPreviews[index] = '';
+        }
+
+        setFiles(newFiles);
+        setPreviews(newPreviews);
     };
 
     const formik = useFormik<FormData>({
         initialValues: {
-            type: PET_STATUS.LOST as PetStatus,
-            name: 'Max',
-            age: 4,
-            gender: GENDER.MALE as Gender,
-            species: PET_SPECIE.DOG as PetSpecies,
-            breed: 'Siberian Husky',
-            // coat: 'Solid black',
-            location: 'Texas',
-            desc: 'He a gud boi fr',
-            imgUrl: '',
-            userId: user?.id || 0,
+            type: DEFAULT_VALUES.type,
+            name: DEFAULT_VALUES.name,
+            age: DEFAULT_VALUES.age,
+            gender: DEFAULT_VALUES.gender,
+            species: DEFAULT_VALUES.species,
+            breed: DEFAULT_VALUES.breed,
+            // coat: DEFAULT_VALUES.coat,
+            location: DEFAULT_VALUES.location,
+            desc: DEFAULT_VALUES.desc,
+            imageUrls: DEFAULT_VALUES.imageUrls,
+            userId: DEFAULT_VALUES.userId,
         },
         validationSchema: Yup.object({
             name: Yup.string().required('Name is required'),
@@ -57,19 +120,18 @@ const CreateAnnouncementPage = () => {
             location: Yup.string().required('Location is required'),
         }),
         onSubmit: (values) => {
-            console.log('Form data submitted:', values);
             handleCreatePet({
+                type: values.type,
                 name: values.name,
-                species: values.species,
-                breed: values.breed,
                 age: values.age,
                 gender: values.gender,
+                species: values.species,
+                breed: values.breed,
                 location: values.location,
                 desc: values.desc,
-                type: values.type,
-                imgUrl: values.imgUrl,
-                userId: values.userId,
-            } as Pet)
+                imageUrls: files,
+                userId: user?.id || 0,
+            } as FormData);
         },
     });
     
@@ -218,10 +280,13 @@ const CreateAnnouncementPage = () => {
                             <ArrowLeft sx={{ fontSize: 50 }} />
                         </IconButton>
                         <Stack direction='row' spacing={2} flex={1} justifyContent='space-around'>
-                            {files.map((file: File, index: number) => {
-                                return (file === '' as unknown as File) ? 
-                                <UploadPhoto key={index} /> : <></>
-                            })}
+                            {[0, 1, 2, 3, 4].map((i) => (
+                                <UploadPhoto
+                                    key={i}
+                                    preview={previews[i]}
+                                    onFileChange={(file) => handleFileChange(i, file)}
+                                />
+                            ))}
                         </Stack>
                         <IconButton color="primary" component="span">
                             <ArrowRight sx={{ fontSize: 50 }} />

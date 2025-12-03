@@ -18,7 +18,7 @@ export interface Pet {
     location: string;
     desc?: string;
     type: PetStatus;
-    imgUrl?: string;
+    imageUrls: string;
     user: User;
     userId: number;
     adopter?: User | null;

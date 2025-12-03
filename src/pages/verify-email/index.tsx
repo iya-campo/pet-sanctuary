@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
+import { VERIFICATION_API } from '@/constants/apiConstants';
 
 const index = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const index = () => {
 
   useEffect(() => {
     if (token && typeof token === 'string') {
-      fetch(`https://pet-sanctuary-api.vercel.app/auth/verify-email?token=${token}`)
+      fetch(`${VERIFICATION_API}?token=${token}`)
         .then((res) => res.json())
         .then((data) => setMessage(data.message || 'Email verification successful.'))
         .catch((err) => {
